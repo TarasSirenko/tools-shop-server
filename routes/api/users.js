@@ -32,7 +32,7 @@ const {
   updateUserInfoController,
   changePasswordRequestController,
   changePasswordController,
-  userChengePasswordController,
+  userChengePasswordController
 } = require("../../controllers/usersController");
 
 
