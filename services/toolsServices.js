@@ -6,28 +6,28 @@ const storage = new Storage();
 const ITEMS_PER_PAGE_TOOLS = 20;
 
 
-const uploadToolPicture = async (toolPicture) => {
-  const { originalname, filename } = toolPicture;
+// const uploadToolPicture = async (toolPicture) => {
+//   const { originalname, filename } = toolPicture;
 
-  const destFileName = `tools/${originalname}`;
-  const fileOptions = {
-    destination: destFileName,
-    metadata: {
-      contentType: "image/png",
+//   const destFileName = `tools/${originalname}`;
+//   const fileOptions = {
+//     destination: destFileName,
+//     metadata: {
+//       contentType: "image/png",
 
-      cacheControl: "public, max-age=3600",
-      acl: [{ entity: "allUsers", role: "READER" }],
-    },
-  };
+//       cacheControl: "public, max-age=3600",
+//       acl: [{ entity: "allUsers", role: "READER" }],
+//     },
+//   };
 
-  await storage
-    .bucket("toolslemaev")
-    .upload(`./uploads/${filename}`, fileOptions);
+//   await storage
+//     .bucket("toolslemaev")
+//     .upload(`./uploads/${filename}`, fileOptions);
 
-  const url = `https://storage.googleapis.com/toolslemaev/tools/${originalname}`;
+//   const url = `https://storage.googleapis.com/toolslemaev/tools/${originalname}`;
 
-  return url;
-};
+//   return url;
+// };
 // new mongoose.Types.ObjectId(userId);
 
 const createTool = async (
@@ -159,7 +159,7 @@ const updateStoreTool = async (storeId, toolId) => {
 
 
 module.exports = {
-  uploadToolPicture,
+  // uploadToolPicture,
   createTool,
   addToolToTheStore,
   getAllTools,
