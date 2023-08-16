@@ -3,6 +3,9 @@ const logger = require('morgan')
 const cors = require('cors')
 const multer = require("multer");
 
+const swaggerUi = require("swagger-ui-express");
+const swaggerDocument = require("./swagger.json");
+
 const { errorHandler } = require("./helpers/apiHelpers");
 const  contactsRouter  = require("./routes/api/contacts");
 const  usersRouter  = require("./routes/api/users");
@@ -19,6 +22,7 @@ app.use(logger(formatsLogger))
 app.use(cors())
 app.use(express.json())
 app.use(upload.none());
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use('/api/contacts', contactsRouter)
 app.use("/api/users", usersRouter);
 app.use("/api/tools", toolsRouter);

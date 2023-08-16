@@ -1,0 +1,226 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Tools Shop API",
+    "version": "1.0.0",
+    "description": "Tool rental shop endpoints API"
+  },
+  "servers": [
+    {
+      "url": "https://tools-shop-server.vercel.app"
+    }
+  ],
+  "paths": {
+    "/api/contacts/signup": {
+      "post": {
+        "tags": ["User"],
+        "summary": "Create a new user",
+        "operationId": "createUser",
+        "requestBody": {
+          "description": "User data",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              },
+              "example": {
+                "password": "12345678",
+                "email": "romasi4991@gmail.com",
+                "phone": "+380638232827"
+              }
+            }
+          }
+        },
+        "responses": {
+        "201": {
+          "description": "User successfully created",
+          "content": {
+            "application/json": {
+              "example": {
+                "email": "romasi4991@gmail.com",
+                "subscription": "client"
+              }
+            }
+          }
+        },
+        "409": {
+          "description": "Conflict - Email already in use",
+          "content": {
+            "application/json": {
+              "example": {
+                "message": "Email already in use"
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "Bad request",
+          "content": {
+            "application/json": {
+              "example": {
+                "message": "Bad request"
+              }
+            }
+          }
+        },
+        "500": {
+          "description": "Internal server error",
+          "content": {
+            "application/json": {
+              "example": {
+                "message": "Internal server error"
+              }
+            }
+          }
+        }}
+      }
+    },
+    "/api/contacts/verify/{verificationToken}": {
+      "get": {
+        "tags": ["User"],
+        "summary": "Verify user with verification token",
+        "operationId": "verifyUser",
+        "parameters": [
+          {
+            "name": "verificationToken",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User verified successfully"
+          },
+          "404": {
+            "description": "User not found"
+          }
+        }
+      }
+    },
+    "/api/contacts/login": {
+      "post": {
+        "tags": ["User"],
+        "summary": "User login",
+        "operationId": "loginUser",
+        "requestBody": {
+          "description": "User login credentials",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserLogin"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "User logged in successfully"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "User": {
+        "type": "object",
+        "properties": {
+          "password": {
+            "type": "string",
+            "description": "User's password",
+            "example": "password"
+          },
+          "name": {
+            "type": "string",
+            "description": "User's name",
+            "example": "John Doe"
+          },
+          "seriesPassportNumber": {
+            "type": "string",
+            "description": "User's passport series and number",
+            "example": "AB123456"
+          },
+          "email": {
+            "type": "string",
+            "description": "User's email",
+            "example": "johndoe@example.com"
+          },
+          "phone": {
+            "type": "string",
+            "description": "User's phone number",
+            "example": "+1234567890"
+          },
+          "subscription": {
+            "type": "string",
+            "description": "User's subscription role",
+            "enum": ["client", "seller", "manager", "director"],
+            "default": "client"
+          },
+          "token": {
+            "type": "string",
+            "description": "User's authentication token",
+            "example": "auth_token"
+          },
+          "verify": {
+            "type": "boolean",
+            "description": "User's verification status",
+            "default": false
+          },
+          "verificationToken": {
+            "type": "string",
+            "description": "User's verification token",
+            "example": "verification_token"
+          },
+          "setPasswordToken": {
+            "type": "string",
+            "description": "Token for setting/resetting password"
+          },
+          "counterGoodOrders": {
+            "type": "integer",
+            "description": "Number of successful orders",
+            "default": 0
+          },
+          "counterOverdueOrders": {
+            "type": "integer",
+            "description": "Number of overdue orders",
+            "default": 0
+          },
+          "counterBrokenTool": {
+            "type": "integer",
+            "description": "Number of broken tools",
+            "default": 0
+          },
+          "availableStores": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "List of store IDs available to the user"
+          },
+          "orders": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "List of order IDs associated with the user"
+          },
+          "tools": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "List of tool IDs associated with the user"
+          }
+        }
+      }
+    }
+  }
+}
