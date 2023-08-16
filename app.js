@@ -6,7 +6,7 @@ const multer = require("multer");
 const { errorHandler } = require("./helpers/apiHelpers");
 const  contactsRouter  = require("./routes/api/contacts");
 const  usersRouter  = require("./routes/api/users");
-const toolsRouter = require("./routes/api/tools")
+// const toolsRouter = require("./routes/api/tools")
 const ordersRouter = require("./routes/api/orders")
 const storesRouter = require("./routes/api/stores");
 
@@ -21,7 +21,7 @@ app.use(express.json())
 app.use(upload.none());
 app.use('/api/contacts', contactsRouter)
 app.use("/api/users", usersRouter);
-app.use("/api/tools", toolsRouter);
+// app.use("/api/tools", toolsRouter);
 app.use("/api/orders", ordersRouter);
 app.use("/api/stores", storesRouter);
 app.use(errorHandler);
