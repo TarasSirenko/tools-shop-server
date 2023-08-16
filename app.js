@@ -1,7 +1,8 @@
 const express = require('express')
 const logger = require('morgan')
 const cors = require('cors')
-// const multer = require("multer");
+const multer = require("multer");
+
 const { errorHandler } = require("./helpers/apiHelpers");
 const  contactsRouter  = require("./routes/api/contacts");
 const  usersRouter  = require("./routes/api/users");
@@ -9,7 +10,7 @@ const toolsRouter = require("./routes/api/tools")
 const ordersRouter = require("./routes/api/orders")
 const storesRouter = require("./routes/api/stores");
 
-// const upload = multer({ dest: "uploads/" });
+const upload = multer();
 const app = express()
 
 const formatsLogger = app.get('env') === 'development' ? 'dev' : 'short'
@@ -17,7 +18,7 @@ const formatsLogger = app.get('env') === 'development' ? 'dev' : 'short'
 app.use(logger(formatsLogger))
 app.use(cors())
 app.use(express.json())
-// app.use(upload.none());
+app.use(upload.none());
 app.use('/api/contacts', contactsRouter)
 app.use("/api/users", usersRouter);
 app.use("/api/tools", toolsRouter);
