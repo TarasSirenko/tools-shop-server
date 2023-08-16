@@ -9,9 +9,9 @@ const {
   createToolParseMiddleware,
 } = require("../../middlewares/createToolParseMiddleware");
 
-const {
-  fileProcessingMiddlewar,
-} = require("../../middlewares/fileProcessingMiddlewar");
+// const {
+//   fileProcessingMiddlewar,
+// } = require("../../middlewares/fileProcessingMiddlewar");
 const {
   directorOrManagerAccessCheckMiddleware,
 } = require("../../middlewares/directorOrManagerAccessCheckMiddleware");
@@ -28,7 +28,7 @@ const {
   updateStoreToolController,
 } = require("../../controllers/toolsController");
 
-router.post("/create", authMiddleware,directorOrManagerAccessCheckMiddleware,fileProcessingMiddlewar,createToolParseMiddleware, asyncWrapper(createToolController));
+router.post("/create", authMiddleware,directorOrManagerAccessCheckMiddleware,createToolParseMiddleware, asyncWrapper(createToolController));
 
 
 router.get("/", asyncWrapper(getAllToolsController));
@@ -53,7 +53,6 @@ router.patch(
   "/update/picture/:toolId",
   authMiddleware,
   directorOrManagerAccessCheckMiddleware,
-  fileProcessingMiddlewar,
   asyncWrapper(updatePictureToolController)
 );
 router.patch(
