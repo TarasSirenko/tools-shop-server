@@ -33,47 +33,48 @@
           }
         },
         "responses": {
-        "201": {
-          "description": "User successfully created",
-          "content": {
-            "application/json": {
-              "example": {
-                "email": "romasi4991@gmail.com",
-                "subscription": "client"
+          "201": {
+            "description": "User successfully created",
+            "content": {
+              "application/json": {
+                "example": {
+                  "email": "romasi4991@gmail.com",
+                  "subscription": "client"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict - Email already in use",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Email already in use"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Bad request"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Internal server error"
+                }
               }
             }
           }
-        },
-        "409": {
-          "description": "Conflict - Email already in use",
-          "content": {
-            "application/json": {
-              "example": {
-                "message": "Email already in use"
-              }
-            }
-          }
-        },
-        "400": {
-          "description": "Bad request",
-          "content": {
-            "application/json": {
-              "example": {
-                "message": "Bad request"
-              }
-            }
-          }
-        },
-        "500": {
-          "description": "Internal server error",
-          "content": {
-            "application/json": {
-              "example": {
-                "message": "Internal server error"
-              }
-            }
-          }
-        }}
+        }
       }
     },
     "/api/contacts/verify/{verificationToken}": {

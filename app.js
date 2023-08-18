@@ -24,8 +24,9 @@ app.use(cors())
 app.use(express.json())
 app.use(upload.none());
 
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
 app.use(express.static(path.join(__dirname, "public")));
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use('/api/contacts', contactsRouter)
 app.use("/api/users", usersRouter);
