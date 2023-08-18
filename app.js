@@ -2,9 +2,10 @@ const express = require('express')
 const logger = require('morgan')
 const cors = require('cors')
 const multer = require("multer");
+const path = require("path");
 
 const swaggerUi = require("swagger-ui-express");
-const swaggerDocument = require("./swagger.json");
+// const swaggerDocument = require("./swagger.json");
 
 const { errorHandler } = require("./helpers/apiHelpers");
 const  contactsRouter  = require("./routes/api/contacts");
@@ -22,7 +23,11 @@ app.use(logger(formatsLogger))
 app.use(cors())
 app.use(express.json())
 app.use(upload.none());
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use("/api-docs", swaggerUi.serve, (req, res) => {
+  const swaggerPath = path.join(__dirname, "./swagger.json");
+  const swaggerDocument = require(swaggerPath);
+  swaggerUi.setup(swaggerDocument)(req, res);
+});
 app.use('/api/contacts', contactsRouter)
 app.use("/api/users", usersRouter);
 app.use("/api/tools", toolsRouter);
