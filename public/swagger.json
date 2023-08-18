@@ -11,7 +11,7 @@
     }
   ],
   "paths": {
-    "/api/contacts/signup": {
+    "/api/users/signup": {
       "post": {
         "tags": ["User"],
         "summary": "Create a new user",
@@ -77,14 +77,16 @@
         }
       }
     },
-    "/api/contacts/verify/{verificationToken}": {
+
+    "/api/users/verify/{verificationToken}": {
       "get": {
         "tags": ["User"],
-        "summary": "Verify user with verification token",
+        "summary": "Verify user email with confirmation token",
         "operationId": "verifyUser",
         "parameters": [
           {
             "name": "verificationToken",
+            "description": "The request with the required token is carried out automatically when you click on the link that is sent to the mail after registration",
             "in": "path",
             "required": true,
             "schema": {
@@ -98,22 +100,28 @@
           },
           "404": {
             "description": "User not found"
+          },
+          "500": {
+            "description": "Internal server error"
           }
         }
       }
     },
-    "/api/contacts/login": {
+    "/api/users/verify": {
       "post": {
         "tags": ["User"],
-        "summary": "User login",
-        "operationId": "loginUser",
+        "summary": "User reverification",
+        "operationId": "verify",
         "requestBody": {
-          "description": "User login credentials",
+          "description": "User email",
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/UserLogin"
+                "$ref": "#/components/schemas/User"
+              },
+              "example": {
+                "email": "romasi4991@gmail.com"
               }
             }
           }
@@ -122,13 +130,253 @@
           "200": {
             "description": "User logged in successfully"
           },
-          "401": {
-            "description": "Unauthorized"
+          "400": {
+            "description": "Missing required field email"
+          },
+          "404": {
+            "description": "User not found"
+          },
+          "403": {
+            "description": "Verification has already been passed"
+          },
+          "500": {
+            "description": "Internal server error"
           }
         }
       }
-    }
-  },
+    },
+
+    "/api/users/login": {
+      "post": {
+        "tags": ["User"],
+        "summary": "User login",
+        "operationId": "login",
+        "requestBody": {
+          "description": "User email and paswword",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              },
+              "example": {
+                "password": "12345678",
+                "email": "romasi4991@gmail.com"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "User successfully created",
+            "content": {
+              "application/json": {
+                "example": {
+                  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRhcmFzc2lyZW5rbzcxQGdtYWlsLmNvbSIsImlkIjoiNjRkYmI5ZDM1NWJhMzUyYTE5OWJmNzMyIiwic3Vic2NyaXB0aW9uIjoiZGlyZWN0b3IiLCJpYXQiOjE2OTIyMjQ5OTh9.pnTrwJZVSKQMQUnRTUQvFyBLTmCqyyGB5DDyNheCGw4",
+                  "user": {
+                    "email": "romasi4991@gmail.com",
+                    "phone": "+389345891245"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Wrong password"
+          },
+          "404": {
+            "description": "User not found"
+          },
+          "403": {
+            "description": "User not verified"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/api/users/logout": {
+      "get": {
+        "tags": ["User"],
+        "summary": "User logout",
+        "operationId": "logout",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Access token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Logout successful"
+          },
+          "404": {
+            "description": "User not found"
+          },
+
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+      "/api/users/changePasswordRequest": {
+      "patch": {
+        "tags": ["User"],
+        "summary": "Password change request",
+        "operationId": "changePasswordRequest",
+        "requestBody": {
+          "description": "User email ",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              },
+              "example": {
+                "email": "romasi4991@gmail.com"
+              }
+            }
+          }
+        },
+        "responses": {
+            "200": {
+            "description": "Letter with a temporary password to restore access has been successfully sent to your mail",
+            "content": {
+              "application/json": {
+                "example": {
+                "mesage": "Letter with a temporary password to restore access has been successfully sent to your mail",
+                  "user": {"user"}
+                }
+              }
+            }
+          },
+
+             "400": {
+            "description": "Message not sent, please try again."
+          },
+          "404": {
+            "description": "User not found"
+          },
+
+          "500": {
+            "description": "Internal server error"
+          }
+            
+          },
+             
+        }
+      }, 
+       "/api/users/changePasword/{changePasswordToken}": {
+      "get": {
+        "tags": ["User"],
+        "summary": "Verification via email to change password",
+        "operationId": "changePasword",
+        "parameters": [
+          {
+            "name": "verificationToken",
+            "description": "The request with the necessary token is carried out automatically when you click on the link that comes to the mail after the request to change the password",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+         "200": {
+            "description": "Password successfully changed to temporary",
+            "content": {
+              "application/json": {
+                "example": {
+                "mesage": "Password successfully changed to temporary",
+                  "user": {"user"}
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Password recovery token is no longer active"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/api/users/userChengePassword": {
+      "get": {
+        "tags": ["User"],
+        "summary": "User chenge password",
+        "operationId": "userChengePassword",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Access token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+         "requestBody": {
+          "description": "User email ",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              },
+              "example": {
+                "email": "romasi4991@gmail.com"
+              }
+            }
+          }
+        },
+         "responses": {
+         "200": {
+            "description": "Password successfully changed",
+            "content": {
+              "application/json": {
+                "example": {
+                "mesage": "Password successfully changed",
+                  "user": {"updatedUser"}
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Wrong password"
+          },
+          "404": {
+            "description": "Password recovery token is no longer active"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+  
+    },
+  
   "components": {
     "schemas": {
       "User": {
@@ -221,6 +469,13 @@
             "description": "List of tool IDs associated with the user"
           }
         }
+      }
+    },
+    "securitySchemes": {
+      "BearerAuth": {
+        "type": "apiKey",
+        "name": "Authorization",
+        "in": "header"
       }
     }
   }

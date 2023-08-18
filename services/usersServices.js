@@ -46,7 +46,7 @@ const createUser = async (email, password, phone, baseUrl) => {
 };
 const userVerificationCheck = async (verificationToken) => {
   const user = await User.findOne({ verificationToken });
-  if (!user) throw new Error("User not found");
+  if (!user) return null
   return await User.findOneAndUpdate(
     { _id: user.id },
     { $set: { verificationToken: null, verify: true } }
@@ -55,7 +55,7 @@ const userVerificationCheck = async (verificationToken) => {
 
 const reVerification = async (email, baseUrl) => {
   const user = await User.findOne({ email });
-  if (!user) throw new Error("User not found");
+  if (!user) return "user"
   if (user.verify) return null;
 
   const verificationToken = uuidv4();
@@ -81,18 +81,12 @@ const reVerification = async (email, baseUrl) => {
   );
 };
 
-const loginUser = async ({ email, password }) => {
+const loginUser = async (email, password ) => {
   const user = await User.findOne({ email: email });
-  if (!user.verify) {
-    throw new Error("You have not verified your email");
-  }
-  if (!user) {
-    throw new Error("There are no registered users with this email");
-  }
+  if (!user.verify) return "Not verified";
+  if (!user) return null
   const isPasswordValid = await bcrypt.compare(password, user.password);
-
-  if (!isPasswordValid) throw new Error("Email or password is wrong");
-
+  if (!isPasswordValid) return "Wrong password"
   const token = jwt.sign(
     {
       email: user.email,
@@ -103,12 +97,12 @@ const loginUser = async ({ email, password }) => {
   );
   await User.findOneAndUpdate({ email: email }, { $set: { token } });
 
-  return { token, user: { email, password } };
+  return { token, user: { email, phone: user.phone } };
 };
 
 const logoutUser = async (userId) => {
   const user = await User.findOne({ _id: userId });
-  if (!user) throw new Error("Not authorized");
+  if (!user) return null
 
   return await User.findOneAndUpdate(
     { _id: userId },
@@ -278,22 +272,23 @@ const hashedPassword = await bcrypt.hash(password, 10);
 };
 
 
-const userChengePassword = async (newPassword, userId) => {
+const userChengePassword = async (newPassword, oldPassword,password,  userId) => {
+ 
+const isPasswordValid = await bcrypt.compare(oldPassword, password);
+if (!isPasswordValid) return "Wrong password";
 
-  try {
-    const hashedPassword = await bcrypt.hash(newPassword, 10);
+  const hashedPassword = await bcrypt.hash(newPassword, 10);
+  const user = await User.findOne({ _id: userId });
+  if(!user) return null
 
     const updatedUser = await User.findOneAndUpdate(
-      { _id: userId },
+      { _id: userId},
       { $set: { password: hashedPassword } },
       { new: true }
     );
 
     return updatedUser;
-  } catch (error) {
-    console.error(error);
-    throw new Error("Password update failed");
-  }
+
 };
 
 

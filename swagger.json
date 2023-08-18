@@ -11,7 +11,7 @@
     }
   ],
   "paths": {
-    "/api/contacts/signup": {
+    "/api/users/signup": {
       "post": {
         "tags": ["User"],
         "summary": "Create a new user",
@@ -77,10 +77,10 @@
         }
       }
     },
-    "/api/contacts/verify/{verificationToken}": {
+    "/api/users/verify/{verificationToken}": {
       "get": {
         "tags": ["User"],
-        "summary": "Verify user with verification token",
+        "summary": "Verify user email with confirmation token",
         "operationId": "verifyUser",
         "parameters": [
           {
