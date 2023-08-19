@@ -231,7 +231,7 @@
         }
       }
     },
-      "/api/users/changePasswordRequest": {
+    "/api/users/changePasswordRequest": {
       "patch": {
         "tags": ["User"],
         "summary": "Password change request",
@@ -251,19 +251,19 @@
           }
         },
         "responses": {
-            "200": {
+          "200": {
             "description": "Letter with a temporary password to restore access has been successfully sent to your mail",
             "content": {
               "application/json": {
                 "example": {
-                "mesage": "Letter with a temporary password to restore access has been successfully sent to your mail",
-                  "user": {"user"}
+                  "mesage": "Letter with a temporary password to restore access has been successfully sent to your mail",
+                  "user": "user"
                 }
               }
             }
           },
 
-             "400": {
+          "400": {
             "description": "Message not sent, please try again."
           },
           "404": {
@@ -272,211 +272,210 @@
 
           "500": {
             "description": "Internal server error"
-          }
-            
-          },
-             
+           }
         }
-      }, 
-       "/api/users/changePasword/{changePasswordToken}": {
-      "get": {
-        "tags": ["User"],
-        "summary": "Verification via email to change password",
-        "operationId": "changePasword",
-        "parameters": [
-          {
-            "name": "verificationToken",
-            "description": "The request with the necessary token is carried out automatically when you click on the link that comes to the mail after the request to change the password",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
+      }
+    },
+      "/api/users/changePasword/{changePasswordToken}": {
+        "get": {
+          "tags": ["User"],
+          "summary": "Verification via email to change password",
+          "operationId": "changePasword",
+          "parameters": [
+            {
+              "name": "verificationToken",
+              "description": "The request with the necessary token is carried out automatically when you click on the link that comes to the mail after the request to change the password",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Password successfully changed to temporary",
+              "content": {
+                "application/json": {
+                  "example": {
+                    "mesage": "Password successfully changed to temporary",
+                    "user": "user"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Password recovery token is no longer active"
+            },
+            "500": {
+              "description": "Internal server error"
             }
           }
-        ],
-        "responses": {
-         "200": {
-            "description": "Password successfully changed to temporary",
+        }
+      },
+      "/api/users/userChengePassword": {
+        "get": {
+          "tags": ["User"],
+          "summary": "User chenge assword",
+          "operationId": "userChengePassword",
+          "security": [
+            {
+              "BearerAuth": []
+            }
+          ],
+          "parameters": [
+            {
+              "name": "Authorization",
+              "in": "header",
+              "description": "Access token",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "requestBody": {
+            "description": "User email ",
+            "required": true,
             "content": {
               "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                },
                 "example": {
-                "mesage": "Password successfully changed to temporary",
-                  "user": {"user"}
+                  "email": "romasi4991@gmail.com"
                 }
               }
             }
           },
-          "404": {
-            "description": "Password recovery token is no longer active"
-          },
-          "500": {
-            "description": "Internal server error"
+          "responses": {
+            "200": {
+              "description": "Password successfully changed",
+              "content": {
+                "application/json": {
+                  "example": {
+                    "mesage": "Password successfully changed",
+                    "user": "updatedUser"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Wrong password"
+            },
+            "404": {
+              "description": "Password recovery token is no longer active"
+            },
+            "500": {
+              "description": "Internal server error"
+            }
           }
         }
       }
     },
-    "/api/users/userChengePassword": {
-      "get": {
-        "tags": ["User"],
-        "summary": "User chenge assword",
-        "operationId": "userChengePassword",
-        "security": [
-          {
-            "BearerAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Access token",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-         "requestBody": {
-          "description": "User email ",
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/User"
+
+      "components": {
+        "schemas": {
+          "User": {
+            "type": "object",
+            "properties": {
+              "password": {
+                "type": "string",
+                "description": "User's password",
+                "example": "password"
               },
-              "example": {
-                "email": "romasi4991@gmail.com"
+              "name": {
+                "type": "string",
+                "description": "User's name",
+                "example": "John Doe"
+              },
+              "seriesPassportNumber": {
+                "type": "string",
+                "description": "User's passport series and number",
+                "example": "AB123456"
+              },
+              "email": {
+                "type": "string",
+                "description": "User's email",
+                "example": "johndoe@example.com"
+              },
+              "phone": {
+                "type": "string",
+                "description": "User's phone number",
+                "example": "+1234567890"
+              },
+              "subscription": {
+                "type": "string",
+                "description": "User's subscription role",
+                "enum": ["client", "seller", "manager", "director"],
+                "default": "client"
+              },
+              "token": {
+                "type": "string",
+                "description": "User's authentication token",
+                "example": "auth_token"
+              },
+              "verify": {
+                "type": "boolean",
+                "description": "User's verification status",
+                "default": false
+              },
+              "verificationToken": {
+                "type": "string",
+                "description": "User's verification token",
+                "example": "verification_token"
+              },
+              "setPasswordToken": {
+                "type": "string",
+                "description": "Token for setting/resetting password"
+              },
+              "counterGoodOrders": {
+                "type": "integer",
+                "description": "Number of successful orders",
+                "default": 0
+              },
+              "counterOverdueOrders": {
+                "type": "integer",
+                "description": "Number of overdue orders",
+                "default": 0
+              },
+              "counterBrokenTool": {
+                "type": "integer",
+                "description": "Number of broken tools",
+                "default": 0
+              },
+              "availableStores": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "List of store IDs available to the user"
+              },
+              "orders": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "List of order IDs associated with the user"
+              },
+              "tools": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "List of tool IDs associated with the user"
               }
             }
           }
         },
-         "responses": {
-         "200": {
-            "description": "Password successfully changed",
-            "content": {
-              "application/json": {
-                "example": {
-                "mesage": "Password successfully changed",
-                  "user": {"updatedUser"}
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Wrong password"
-          },
-          "404": {
-            "description": "Password recovery token is no longer active"
-          },
-          "500": {
-            "description": "Internal server error"
+        "securitySchemes": {
+          "BearerAuth": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
           }
         }
-      }
-    },
-  
-    },
-  
-  "components": {
-    "schemas": {
-      "User": {
-        "type": "object",
-        "properties": {
-          "password": {
-            "type": "string",
-            "description": "User's password",
-            "example": "password"
-          },
-          "name": {
-            "type": "string",
-            "description": "User's name",
-            "example": "John Doe"
-          },
-          "seriesPassportNumber": {
-            "type": "string",
-            "description": "User's passport series and number",
-            "example": "AB123456"
-          },
-          "email": {
-            "type": "string",
-            "description": "User's email",
-            "example": "johndoe@example.com"
-          },
-          "phone": {
-            "type": "string",
-            "description": "User's phone number",
-            "example": "+1234567890"
-          },
-          "subscription": {
-            "type": "string",
-            "description": "User's subscription role",
-            "enum": ["client", "seller", "manager", "director"],
-            "default": "client"
-          },
-          "token": {
-            "type": "string",
-            "description": "User's authentication token",
-            "example": "auth_token"
-          },
-          "verify": {
-            "type": "boolean",
-            "description": "User's verification status",
-            "default": false
-          },
-          "verificationToken": {
-            "type": "string",
-            "description": "User's verification token",
-            "example": "verification_token"
-          },
-          "setPasswordToken": {
-            "type": "string",
-            "description": "Token for setting/resetting password"
-          },
-          "counterGoodOrders": {
-            "type": "integer",
-            "description": "Number of successful orders",
-            "default": 0
-          },
-          "counterOverdueOrders": {
-            "type": "integer",
-            "description": "Number of overdue orders",
-            "default": 0
-          },
-          "counterBrokenTool": {
-            "type": "integer",
-            "description": "Number of broken tools",
-            "default": 0
-          },
-          "availableStores": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "List of store IDs available to the user"
-          },
-          "orders": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "List of order IDs associated with the user"
-          },
-          "tools": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "List of tool IDs associated with the user"
-          }
-        }
-      }
-    },
-    "securitySchemes": {
-      "BearerAuth": {
-        "type": "apiKey",
-        "name": "Authorization",
-        "in": "header"
       }
     }
-  }
-}
+  
+

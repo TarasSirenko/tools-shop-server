@@ -231,7 +231,7 @@
         }
       }
     },
-      "/api/users/changePasswordRequest": {
+    "/api/users/changePasswordRequest": {
       "patch": {
         "tags": ["User"],
         "summary": "Password change request",
@@ -251,19 +251,19 @@
           }
         },
         "responses": {
-            "200": {
+          "200": {
             "description": "Letter with a temporary password to restore access has been successfully sent to your mail",
             "content": {
               "application/json": {
                 "example": {
-                "mesage": "Letter with a temporary password to restore access has been successfully sent to your mail",
-                  "user": {"user"}
+                  "mesage": "Letter with a temporary password to restore access has been successfully sent to your mail",
+                  "user": "user"
                 }
               }
             }
           },
 
-             "400": {
+          "400": {
             "description": "Message not sent, please try again."
           },
           "404": {
@@ -273,12 +273,10 @@
           "500": {
             "description": "Internal server error"
           }
-            
-          },
-             
         }
-      }, 
-       "/api/users/changePasword/{changePasswordToken}": {
+      }
+    },
+    "/api/users/changePasword/{changePasswordToken}": {
       "get": {
         "tags": ["User"],
         "summary": "Verification via email to change password",
@@ -295,13 +293,13 @@
           }
         ],
         "responses": {
-         "200": {
+          "200": {
             "description": "Password successfully changed to temporary",
             "content": {
               "application/json": {
                 "example": {
-                "mesage": "Password successfully changed to temporary",
-                  "user": {"user"}
+                  "mesage": "Password successfully changed to temporary",
+                  "user": "user"
                 }
               }
             }
@@ -336,7 +334,7 @@
             }
           }
         ],
-         "requestBody": {
+        "requestBody": {
           "description": "User email ",
           "required": true,
           "content": {
@@ -350,14 +348,14 @@
             }
           }
         },
-         "responses": {
-         "200": {
+        "responses": {
+          "200": {
             "description": "Password successfully changed",
             "content": {
               "application/json": {
                 "example": {
-                "mesage": "Password successfully changed",
-                  "user": {"updatedUser"}
+                  "mesage": "Password successfully changed",
+                  "user": "updatedUser"
                 }
               }
             }
@@ -373,10 +371,9 @@
           }
         }
       }
-    },
-  
-    },
-  
+    }
+  },
+
   "components": {
     "schemas": {
       "User": {
