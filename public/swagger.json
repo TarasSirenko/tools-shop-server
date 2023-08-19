@@ -318,7 +318,7 @@
     "/api/users/userChengePassword": {
       "get": {
         "tags": ["User"],
-        "summary": "User chenge password",
+        "summary": "User chenge assword",
         "operationId": "userChengePassword",
         "security": [
           {
