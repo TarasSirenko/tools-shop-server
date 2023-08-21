@@ -399,7 +399,7 @@
         "operationId": "changePasword",
         "parameters": [
           {
-            "name": "verificationToken",
+            "name": "changePasswordToken",
             "description": "The request with the necessary token is carried out automatically when you click on the link that comes to the mail after the request to change the password",
             "in": "path",
             "required": true,
