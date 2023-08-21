@@ -96,13 +96,32 @@
         ],
         "responses": {
           "200": {
-            "description": "User verified successfully"
+            "description": "User verified successfully",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "User verified successfully"
+                }
+              }
+            }
           },
           "404": {
-            "description": "User not found"
+            "description": "User not found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "User not found"
+                }
+              }
+            }
           },
           "500": {
-            "description": "Internal server error"
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "example": { "message": "Internal server error" }
+              }
+            }
           }
         }
       }
@@ -128,19 +147,52 @@
         },
         "responses": {
           "200": {
-            "description": "User logged in successfully"
+            "description": "User logged in successfully",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "User logged in successfully"
+                }
+              }
+            }
           },
           "400": {
-            "description": "Missing required field email"
+            "description": "Missing required field email",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Missing required field email"
+                }
+              }
+            }
           },
           "404": {
-            "description": "User not found"
+            "description": "User not found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "User not found"
+                }
+              }
+            }
           },
           "403": {
-            "description": "Verification has already been passed"
+            "description": "Verification has already been passed",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Wrong password"
+                }
+              }
+            }
           },
           "500": {
-            "description": "Internal server error"
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "example": { "message": "Internal server error" }
+              }
+            }
           }
         }
       }
@@ -182,16 +234,42 @@
             }
           },
           "400": {
-            "description": "Wrong password"
+            "description": "Wrong password",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Wrong password"
+                }
+              }
+            }
           },
           "404": {
-            "description": "User not found"
+            "description": "User not found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "User not found"
+                }
+              }
+            }
           },
           "403": {
-            "description": "User not verified"
+            "description": "User not verified",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "User not verified"
+                }
+              }
+            }
           },
           "500": {
-            "description": "Internal server error"
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "example": { "message": "Internal server error" }
+              }
+            }
           }
         }
       }
@@ -219,14 +297,33 @@
         ],
         "responses": {
           "204": {
-            "description": "Logout successful"
+            "description": "Logout successful",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Logout successful"
+                }
+              }
+            }
           },
           "404": {
-            "description": "User not found"
+            "description": "User not found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "User not found"
+                }
+              }
+            }
           },
 
           "500": {
-            "description": "Internal server error"
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "example": { "message": "Internal server error" }
+              }
+            }
           }
         }
       }
@@ -264,14 +361,33 @@
           },
 
           "400": {
-            "description": "Message not sent, please try again."
+            "description": "Message not sent, please try again.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Message not sent, please try again."
+                }
+              }
+            }
           },
           "404": {
-            "description": "User not found"
+            "description": "User not found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "User not found"
+                }
+              }
+            }
           },
 
           "500": {
-            "description": "Internal server error"
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "example": { "message": "Internal server error" }
+              }
+            }
           }
         }
       }
@@ -305,16 +421,28 @@
             }
           },
           "404": {
-            "description": "Password recovery token is no longer active"
+            "description": "Password recovery token is no longer active",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Password recovery token is no longer active"
+                }
+              }
+            }
           },
           "500": {
-            "description": "Internal server error"
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "example": { "message": "Internal server error" }
+              }
+            }
           }
         }
       }
     },
     "/api/users/userChengePassword": {
-      "get": {
+      "patch": {
         "tags": ["User"],
         "summary": "User chenge assword",
         "operationId": "userChengePassword",
@@ -361,13 +489,700 @@
             }
           },
           "400": {
-            "description": "Wrong password"
+            "description": "Wrong password",
+            "content": {
+              "application/json": {
+                "example": { "message": "Wrong password" }
+              }
+            }
           },
           "404": {
-            "description": "Password recovery token is no longer active"
+            "description": "Password recovery token is no longer active",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Password recovery token is no longer active"
+                }
+              }
+            }
           },
           "500": {
-            "description": "Internal server error"
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "example": { "message": "Internal server error" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/users/": {
+      "get": {
+        "tags": ["User"],
+        "summary": "Get all users",
+        "operationId": "getUsers",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Access token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "User page number (20 each)",
+            "required": false,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Users",
+            "content": {
+              "application/json": {
+                "example": [
+                  {
+                    "id": 1,
+                    "username": "user1",
+                    "email": "user1@example.com"
+                  },
+                  {
+                    "id": 2,
+                    "username": "user2",
+                    "email": "user2@example.com"
+                  }
+                ]
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "example": { "message": "Internal server error" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/users/{userId}": {
+      "get": {
+        "tags": ["User"],
+        "summary": "Get user by id",
+        "operationId": "getUserById",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Access token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "userId",
+            "description": "User id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User",
+            "content": {
+              "application/json": {
+                "example": {
+                  "id": 1,
+                  "username": "user1",
+                  "email": "user1@example.com"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User not found",
+            "content": {
+              "application/json": {
+                "example": { "message": "No user with this id" }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "example": { "message": "Internal server error" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/users/byPhone": {
+      "get": {
+        "tags": ["User"],
+        "summary": "Get user by phone",
+        "operationId": "getUserByPhone",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Access token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "User phone",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              },
+              "example": {
+                "phone": "+380638472839"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "User",
+            "content": {
+              "application/json": {
+                "example": {
+                  "id": 1,
+                  "username": "user1",
+                  "email": "user1@example.com"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User not found",
+            "content": {
+              "application/json": {
+                "example": { "message": "No user with this phone" }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "example": { "message": "Internal server error" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/users/remove": {
+      "delete": {
+        "tags": ["User"],
+        "summary": "Remove user by id",
+        "operationId": "removeUserById",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Access token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "User id",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              },
+              "example": {
+                "userId": "1214264"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Deleted user",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "User deleted successfully",
+                  "deletedUser": {
+                    "id": 1,
+                    "username": "user1",
+                    "email": "user1@example.com"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User not found",
+            "content": {
+              "application/json": {
+                "example": { "message": "No user with this id" }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "example": { "message": "Internal server error" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/users/role": {
+      "patch": {
+        "tags": ["User"],
+        "summary": "Update user status",
+        "operationId": "updateUserStatus",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Access token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "User id",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              },
+              "example": {
+                "userId": "1214264",
+                "subscription": "client"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated user",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "User status updated successfully",
+                  "updatedUser": {
+                    "id": 1,
+                    "username": "user1",
+                    "email": "user1@example.com"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User not found",
+            "content": {
+              "application/json": {
+                "example": { "message": "No user with this id" }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "example": { "message": "Internal server error" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/users/addAccess": {
+      "patch": {
+        "tags": ["User"],
+        "summary": "Add access to the store for the user",
+        "operationId": "addAccess",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Access token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "User id",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              },
+              "example": {
+                "userId": "1214264",
+                "storeId": "1214264"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated user",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "User rights are extended (if the user has the status of a seller, then the store has been replaced)",
+                  "updatedUser": {
+                    "id": 1,
+                    "username": "user1",
+                    "email": "user1@example.com"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Impossibility of extension of rights",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "It is impossible to expand the rights of the client"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User not found",
+            "content": {
+              "application/json": {
+                "example": { "message": "No user with this id" }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "example": { "message": "Internal server error" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/users/removeAccess": {
+      "patch": {
+        "tags": ["User"],
+        "summary": "Remove access to the store for the user",
+        "operationId": "removeAccess",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Access token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "User id",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              },
+              "example": {
+                "userId": "1214264",
+                "storeId": "1214264"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated user",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "The store is no longer available to this user",
+                  "updatedUser": {
+                    "id": 1,
+                    "username": "user1",
+                    "email": "user1@example.com"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "It is impossible to expand the rights of the client",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "It is impossible to expand the rights of the client"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User not found",
+            "content": {
+              "application/json": {
+                "example": { "message": "No user with this id" }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "example": { "message": "Internal server error" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/users/statistics": {
+      "patch": {
+        "tags": ["User"],
+        "summary": "Update user statistic",
+        "operationId": "updateStatistic",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Access token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "User id",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              },
+              "example": {
+                "userId": "1214264",
+                "resultOfCooperation": [
+                  "GoodOrders",
+                  "OverdueOrders",
+                  "BrokenTool"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated user",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Client stats updated",
+                  "updatedUser": {
+                    "id": 1,
+                    "username": "user1",
+                    "email": "user1@example.com"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Order statistics are relevant only for customers",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Order statistics are relevant only for customers"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User not found",
+            "content": {
+              "application/json": {
+                "example": { "message": "No user with this id" }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "example": { "message": "Internal server error" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/users/updateUserInfo": {
+      "patch": {
+        "tags": ["User"],
+        "summary": "Update user info",
+        "operationId": "updateUserInfo",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Access token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "User updates. Be sure to pass only the user ID",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "userId": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "seriesPassportNumber": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "phone": {
+                    "type": "string"
+                  }
+                },
+                "required": ["userId"]
+              },
+              "example": {
+                "userId": "1214264",
+                "name": "",
+                "seriesPassportNumber": "",
+                "email": "",
+                "phone": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated user",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "User updated successfully",
+                  "updatedUser": {
+                    "id": 1,
+                    "username": "user1",
+                    "email": "user1@example.com"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User not found",
+            "content": {
+              "application/json": {
+                "example": { "message": "No user with this id" }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "example": { "message": "Internal server error" }
+              }
+            }
           }
         }
       }
