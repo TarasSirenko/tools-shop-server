@@ -23,8 +23,8 @@ const toolsSchema = new mongoose.Schema({
   // =======================================  this chenge with a orders
   status: {
     type: String,
-    enum: ["available", "rented", "broken"],
-    default: "available",
+    enum: ["Доступний", "Недоступний", "В ремонті"],
+    default: "Доступний",
   },
   // =======================================
   specifications: [

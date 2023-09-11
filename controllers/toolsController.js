@@ -1,4 +1,4 @@
-// const fs = require("fs");
+
 const {
   uploadToolPicture,
   createTool,
@@ -17,6 +17,7 @@ const {
 } = require("../services/toolsServices");
 
 const createToolController = async (req, res) => {
+  const toolInfo = JSON.parse(req.body.data);
   const {
     name,
     type,
@@ -26,9 +27,12 @@ const createToolController = async (req, res) => {
     price,
     tags,
     storeId,
-  } = req.body;
-  // const toolPictureUrl = await uploadToolPicture(req.file);
-  // if (!toolPictureUrl) return res.status(404).json("Failed to load image");
+  } = toolInfo;
+  const toolPictureUrl = await uploadToolPicture(
+    req.files[0],
+    req.files[0].originalname
+  );
+  if (!toolPictureUrl) return res.status(404).json("Failed to load image");
   const newTool = await createTool(
     name,
     type,
@@ -37,16 +41,10 @@ const createToolController = async (req, res) => {
     description,
     price,
     tags,
-    // toolPictureUrl,
+    toolPictureUrl,
     storeId
   );
-  // fs.unlink(req.file.path, (err) => {
-  //   if (err) {
-  //     console.error("Error deleting file:", err);
-  //   } else {
-  //     console.log("File deleted successfully");
-  //   }
-  // });
+  
   const updatedStore = await addToolToTheStore(storeId, newTool._id);
   if (!updatedStore) return res.status(404).json("No store with this id");
 

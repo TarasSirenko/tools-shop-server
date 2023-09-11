@@ -136,8 +136,8 @@ module.exports = {
         "any.required": "Serial number is required.",
       }),
       status: Joi.string()
-        .valid("available", "rented", "broken")
-        .default("available"),
+        .valid("Доступний", "Недоступний", "В ремонті")
+        .default("Доступний"),
       price: Joi.number().required().messages({
         "any.required": "Price is required.",
         "number.base": "Price must be a number.",

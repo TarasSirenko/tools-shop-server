@@ -14,7 +14,7 @@ const toolsRouter = require("./routes/api/tools")
 const ordersRouter = require("./routes/api/orders")
 const storesRouter = require("./routes/api/stores");
 
-const upload = multer();
+// const upload = multer();
 const app = express()
 
 const formatsLogger = app.get('env') === 'development' ? 'dev' : 'short'
@@ -22,7 +22,7 @@ const formatsLogger = app.get('env') === 'development' ? 'dev' : 'short'
 app.use(logger(formatsLogger))
 app.use(cors())
 app.use(express.json())
-app.use(upload.none());
+app.use(multer().any());
 
 
 app.use(express.static(path.join(__dirname, "public")));

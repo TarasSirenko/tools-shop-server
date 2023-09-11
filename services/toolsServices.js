@@ -2,32 +2,42 @@ const { Tool } = require("../db/models/toolsModel");
 const { Store } = require("../db/models/storesModel");
 const { Storage } = require("@google-cloud/storage");
 const storage = new Storage();
+const { Readable } = require("stream");
 
 const ITEMS_PER_PAGE_TOOLS = 20;
 
 
-// const uploadToolPicture = async (toolPicture) => {
-//   const { originalname, filename } = toolPicture;
+const uploadToolPicture = async (file, originalname) => {
+    const destFileName = `tools/${originalname}`;
+    const fileOptions = {
+      metadata: {
+        contentType: "image/png",
+        cacheControl: "public, max-age=3600",
+        acl: [{ entity: "allUsers", role: "READER" }],
+      },
+    };
 
-//   const destFileName = `tools/${originalname}`;
-//   const fileOptions = {
-//     destination: destFileName,
-//     metadata: {
-//       contentType: "image/png",
+    const bucket = storage.bucket("toolslemaev");
+    const fileStream = bucket.file(destFileName).createWriteStream(fileOptions);
 
-//       cacheControl: "public, max-age=3600",
-//       acl: [{ entity: "allUsers", role: "READER" }],
-//     },
-//   };
+    const fileReadStream = new Readable();
+    fileReadStream.push(file.buffer);
+    fileReadStream.push(null); // Завершение потока
 
-//   await storage
-//     .bucket("toolslemaev")
-//     .upload(`./uploads/${filename}`, fileOptions);
+    // Передача потока файла напрямую из клиента в хранилище
+    fileReadStream.pipe(fileStream);
 
-//   const url = `https://storage.googleapis.com/toolslemaev/tools/${originalname}`;
+    return new Promise((resolve, reject) => {
+      fileStream.on("error", (error) => {
+        reject(error);
+      });
 
-//   return url;
-// };
+      fileStream.on("finish", () => {
+        const url = `https://storage.googleapis.com/toolslemaev/${destFileName}`;
+        resolve(url);
+      });
+    });
+};
 // new mongoose.Types.ObjectId(userId);
 
 const createTool = async (
@@ -159,7 +169,7 @@ const updateStoreTool = async (storeId, toolId) => {
 
 
 module.exports = {
-  // uploadToolPicture,
+  uploadToolPicture,
   createTool,
   addToolToTheStore,
   getAllTools,

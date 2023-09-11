@@ -1,6 +1,9 @@
 const createToolParseMiddleware = async (req, res, next) => {
-   const specificationsJSON = req.body.specifications;
-  const descriptionJSON = req.body.description;
+  console.log(req.body);
+
+  console.log(JSON.parse(req.body.data));
+   const specificationsJSON = req.body.data.specifications;
+  const descriptionJSON = req.body.data.description;
 
   try {
     req.body.specifications = JSON.parse(specificationsJSON);
