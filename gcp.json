@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "numeric-habitat-391012",
+  "private_key_id": "a9bad0a7da7640526af78e1a9f1ad378c256df18",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDDGcBa1rOUlx5Q\nEv24ox4F14Zg20Py7C1e5c/w83bskxENVugE22tFApg+9nVPIAurVN+jw36kR/bH\njx1Q6alnkNNLTn3oDj0StsX/RZ07Q5bGk/IjrB5gMoj6kqMqpBFpvl+aBS+Rv5s1\nyVAO2/gqZKRAuq679aQ77OIYOYw4SJSyfjRP2v+qGTN3FEA0dgHGDYVxxX04+eyK\nYoZXLWHR2hBrTiDSTlS6nluf7k/s/1kEh7fl61pQ9PNPfFMKNc5RxGXtlFBcEjXh\neDneHGsdLfp4pQNqUPrZfoWjuy82ayIaD7UvlFm7E6SbZHAA8UP95u3kLp3DRJ4P\nVFMiw+dNAgMBAAECggEADW1DA+1lN/trcmLQM8oECa5iuN02MKxo1fBWbnRu8YqQ\ngJzDxHvORtZOIH0pJxwjOXQSnQxZ9ZffR64VfClMh4xbwkHBX/xE3zoVZ8NEdhzp\nbjqlzictAv1PWIFJeeiHK0IXBbxIIQ1w8tNrL06bpl09QZgnaNeXqSkdCUJCoGfd\nhYuHwSKhpoqD2+DmejNABmm/usZGgajUCGDr6O2qVrKInGDbL2hq+bj+QMHC0BBG\nA6VYlJ5dtPmnq7/jyJXo83WJwD4vT4/aCh6yLBLZzanCT9D+ndDt0gFj4YYTAftN\n1Yg3/dnh37gAlRCCbn+fibcaUtAgN5WJyBTu4yBkCQKBgQDs/Q90eqs7GujMwiYA\nPb+55QTLbcT5dws6y63LlduRrWk4WrSN8WON2yFgDmjvVo0qqyKApEIgKIJi3Yta\nCGpk4MO7Ts4s0VmGvuMXcUWjRturqeOggkGQIGPQZXF2XXQU+7muowI61bqeOTfl\nZF8Nw+1RCU3YFNfOPhgMR8pqCQKBgQDSwHSJOHrUked043V1nCrlEMR+VOJYXlfG\nGICUVmFV+Z93/XIF28nnzL7BF4P0UINnNnQd2CmDh18hRcsG6h1mKCNZT3EfxH5U\nWYbUI2tMkZimCvliLeoeOqHJwKrWASz7uyGmOV5M81iVB+DhkR3lJ5AQ55+YpRZ5\nTxLQzmL0JQKBgQDU+Va6RsM7CqPL325nKRbz6Gy2pJ8v0Vu2KvS00KfR8xVsH5fD\nN/tPsG399PU4oX+bqNAI65TBcaY7Uv24m3eB0LwVyGxguoLKJSHQH2uFoFgpnTOD\nO4vQCkupLIEa7kEz2kS0PKn0Vb6wEpu4+sqxhDHxcXsThSeroQHbh2jQgQKBgCGZ\n/7qVH7henumbDnI2+PvWpY2C2Se/uvzhkTaVYyWDDDLkXNakSVfE5DEDH83HPHwr\nSW4stcm7vqYea5VppFBSW/h0WxP2jzHBqGaQUx49JHpsy4Ak0+wH6x2ws0w1mcd0\n+ZN4GBnqvpfcTrWIHp0XprebRm3e/GtQ+S4DifFlAoGAK8YRwn998v3qFMtuW5E5\n/eNrGhrSrwCDutLe3huFsHUXpdljSLtsXiLq0oez2C0FZOnbZuCwPu8PUn/9WjZH\nmRxxhHQzmKGLmCjvCeqoKv1MsOek8SCBqfuA61P2C8kEEZ3XMr6oSDiKkBc5Y3mz\nhwjRg4PkWMzcfzC0/ZrwJVY=\n-----END PRIVATE KEY-----\n",
+  "client_email": "tools-shop-taras-colobaration@numeric-habitat-391012.iam.gserviceaccount.com",
+  "client_id": "103990232678849573374",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/tools-shop-taras-colobaration%40numeric-habitat-391012.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
