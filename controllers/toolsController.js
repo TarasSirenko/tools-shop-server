@@ -29,9 +29,10 @@ const createToolController = async (req, res) => {
     storeId,
   } = toolInfo;
  
-  const toolPictureUrl = await uploadToolPicture(req.files[0]);
+  // const toolPictureUrl = await uploadToolPicture(req.files[0]);
+  const toolPictureUrl = null
 
-  if (!toolPictureUrl) return res.status(404).json("Failed to load image");
+  // if (!toolPictureUrl) return res.status(404).json("Failed to load image");
   const newTool = await createTool(
     name,
     type,
@@ -136,18 +137,8 @@ const updatePictureToolController = async (req, res) => {
 
  const newToolPictureUrl = await uploadToolPicture(req.files[0]);
   if (!newToolPictureUrl) return res.status(404).json("Failed to load image");
-  
 
   const updatedTool = await updatePictureTool(toolId, newToolPictureUrl);
-
-    // fs.unlink(req.file.path, (err) => {
-    //   if (err) {
-    //     console.error("Error deleting file:", err);
-    //   } else {
-    //     console.log("File deleted successfully");
-    //   }
-    // });
-
   return res.status(200).json(updatedTool);
 };
 

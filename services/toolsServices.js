@@ -3,8 +3,6 @@ const { Store } = require("../db/models/storesModel");
 const cloudinary = require("cloudinary").v2;
 const streamifier = require("streamifier");
 
-
-
 const ITEMS_PER_PAGE_TOOLS = 20;
 
 const uploadToolPicture = async (file) => {

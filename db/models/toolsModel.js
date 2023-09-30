@@ -14,7 +14,7 @@ const toolsSchema = new mongoose.Schema({
   },
   toolPicture: {
     type: String,
-    required: [true, "Tool picture is required"],
+    required: [false, "Tool picture is required"],
   },
   serialNumber: {
     type: String,
