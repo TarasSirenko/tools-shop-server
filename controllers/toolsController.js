@@ -29,10 +29,10 @@ const createToolController = async (req, res) => {
     storeId,
   } = toolInfo;
  
-  // const toolPictureUrl = await uploadToolPicture(req.files[0]);
-  const toolPictureUrl = null
+  const toolPictureUrl = await uploadToolPicture(req.files[0]);
+ 
 
-  // if (!toolPictureUrl) return res.status(404).json("Failed to load image");
+  if (!toolPictureUrl) return res.status(404).json("Failed to load image");
   const newTool = await createTool(
     name,
     type,

@@ -5,6 +5,12 @@ const streamifier = require("streamifier");
 
 const ITEMS_PER_PAGE_TOOLS = 20;
 
+// cloudinary.config({
+//   cloud_name: "ваше_cloud_name",
+//   api_key: "ваш_api_key",
+//   api_secret: "ваш_api_secret",
+// });
+
 const uploadToolPicture = async (file) => {
   console.log(file);
   return new Promise(((resolve, reject) => {
