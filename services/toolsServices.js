@@ -1,44 +1,39 @@
 const { Tool } = require("../db/models/toolsModel");
 const { Store } = require("../db/models/storesModel");
-const { Storage } = require("@google-cloud/storage");
-const storage = new Storage();
-const { Readable } = require("stream");
+const cloudinary = require("cloudinary").v2;
+const streamifier = require("streamifier");
+
+
 
 const ITEMS_PER_PAGE_TOOLS = 20;
 
-
-const uploadToolPicture = async (file, originalname) => {
-    const destFileName = `tools/${originalname}`;
-    const fileOptions = {
-      metadata: {
-        contentType: "image/png",
-        cacheControl: "public, max-age=3600",
-        acl: [{ entity: "allUsers", role: "READER" }],
-      },
-    };
-
-    const bucket = storage.bucket("toolslemaev");
-    const fileStream = bucket.file(destFileName).createWriteStream(fileOptions);
-
-    const fileReadStream = new Readable();
-    fileReadStream.push(file.buffer);
-    fileReadStream.push(null); // Завершение потока
-
-    // Передача потока файла напрямую из клиента в хранилище
-    fileReadStream.pipe(fileStream);
-
-    return new Promise((resolve, reject) => {
-      fileStream.on("error", (error) => {
-        reject(error);
-      });
-
-      fileStream.on("finish", () => {
-        const url = `https://storage.googleapis.com/toolslemaev/${destFileName}`;
-        resolve(url);
-      });
-    });
+const uploadToolPicture = async (file) => {
+  console.log(file);
+  return new Promise(((resolve, reject) => {
+    let url = ''
+   const cldUploadStream = cloudinary.uploader.upload_stream(
+     {
+       folder: "tools", // Папка, в которую загружается изображение
+       public_id: file.originalname, // Оригинальное имя файла
+       resource_type: "auto", // Тип ресурса (автоопределение)
+       eager: [{ width: 195, height: 195, crop: "fill" }], // Опциональные манипуляции с изображением
+     },
+     function (error, result) {
+       if (error) {
+         reject(error);
+         return undefined;
+       } else {
+         url = result.secure_url;
+         console.log("URL загруженного изображения:", url);
+         resolve(url);
+       }
+     }
+   );
+  
+   streamifier.createReadStream(file.buffer).pipe(cldUploadStream);
+  }))
 };
-// new mongoose.Types.ObjectId(userId);
+
 
 const createTool = async (
   name,
@@ -105,14 +100,25 @@ const removeToolFromTheStore = async (storeId, toolId) => {
 };
 
 const deleteFileFromStorage = async (fileUrl) => {
-  const filename = fileUrl.substring(fileUrl.lastIndexOf("/") + 1);
-  try {
-    await storage.bucket("toolslemaev").file(`tools/${filename}`).delete();
-    return true; 
-  } catch (error) {
-    console.error("Error deleting file:", error);
-    return false; 
-  }
+
+  const isPhotoUsed =  await Tool.findOne({
+     toolPicture: fileUrl,
+  });
+  if(isPhotoUsed) return false
+
+const matches = fileUrl.match(/\/([^/]+)\.\w+$/);
+const publicId = matches ? matches[1] : null;
+
+  const result = await cloudinary.api
+    .delete_resources(`tools/${publicId}`, {
+      type: "upload",
+      resource_type: "image",
+    })
+    .then((response) => {
+      const result = response.deleted[`tools/${publicId}`] === "deleted";
+      return result;
+    })
+  return result;
 };
 
 

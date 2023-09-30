@@ -14,7 +14,6 @@ const toolsRouter = require("./routes/api/tools")
 const ordersRouter = require("./routes/api/orders")
 const storesRouter = require("./routes/api/stores");
 
-// const upload = multer();
 const app = express()
 
 const formatsLogger = app.get('env') === 'development' ? 'dev' : 'short'
