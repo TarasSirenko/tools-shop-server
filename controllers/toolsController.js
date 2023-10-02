@@ -3,9 +3,9 @@ const {
   uploadToolPicture,
   createTool,
   addToolToTheStore,
-  getAllTools,
-  getToolByStore,
-  getToolByType,
+  getTools,
+  // getToolByStore,
+  // getToolByType,
   getToolById,
   deleteFileFromStorage,
   deleteTool,
@@ -51,27 +51,16 @@ const createToolController = async (req, res) => {
   return res.status(200).json(newTool);
 };
 
-const getAllToolsController = async (req, res) => {
+const getToolsController = async (req, res) => {
   const page = req.query.page || 1;
-  const allTools = await getAllTools(page);
-  if (allTools.length === 0) return res.status(404).json("Tool not found");
-  return res.status(200).json(allTools);
+  const { store, type, tags } = req.query;
+
+   const tools = await getTools(page, store, type, tags); 
+
+  if (tools.length === 0) return res.status(404).json("Tool not found");
+  return res.status(200).json(tools);
 };
 
-const getToolByStoreController = async (req, res) => {
-  const page = req.query.page || 1;
-  const { storeId } = req.body;
-  const tools = await getToolByStore(storeId, page);
-  if (tools.length === 0) return res.status(404).json("Tool not found");
-  return res.status(200).json(tools);
-};
-const getToolByTypeController = async (req, res) => {
-  const page = req.query.page || 1;
-  const { type } = req.body;
-  const tools = await getToolByType(type, page);
-  if (tools.length === 0) return res.status(404).json("Tool not found");
-  return res.status(200).json(tools);
-};
 const getToolByIdController = async (req, res) => {
   const { toolId } = req.params;
   const tool = await getToolById(toolId);
@@ -161,9 +150,9 @@ const updateStoreToolController = async (req, res) => {
 
 module.exports = {
   createToolController,
-  getAllToolsController,
-  getToolByStoreController,
-  getToolByTypeController,
+  getToolsController,
+  // getToolByStoreController,
+  // getToolByTypeController,
   getToolByIdController,
   deleteToolController,
   updateInformationToolController,

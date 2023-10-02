@@ -5,11 +5,6 @@ const streamifier = require("streamifier");
 
 const ITEMS_PER_PAGE_TOOLS = 20;
 
-// cloudinary.config({
-//   cloud_name: "ваше_cloud_name",
-//   api_key: "ваш_api_key",
-//   api_secret: "ваш_api_secret",
-// });
 
 const uploadToolPicture = async (file) => {
   console.log(file);
@@ -72,19 +67,17 @@ const addToolToTheStore = async (storeId, toolId) => {
     { new: true }
   );
 };
-const getAllTools = async (page) => {
-  const skip = (page -1) * ITEMS_PER_PAGE_TOOLS
+const getTools = async (page, store, type, tags) => {
+  const skip = (page - 1) * ITEMS_PER_PAGE_TOOLS;
+    const query = {};
 
-  return await Tool.find({}, "_id name type toolPicture status price").skip(skip).limit(ITEMS_PER_PAGE_TOOLS);
-};
-const getToolByStore = async (storeId, page) => {
-  const skip = (page -1) * ITEMS_PER_PAGE_TOOLS
-  return await Tool.find({ storeId }, "_id name type toolPicture status price").skip(skip).limit(ITEMS_PER_PAGE_TOOLS);
-};
-
-const getToolByType = async (type, page) => {
-  const skip = (page -1) * ITEMS_PER_PAGE_TOOLS
-  return await Tool.find({ type }, "_id name type toolPicture status price").skip(skip).limit(ITEMS_PER_PAGE_TOOLS);
+    if (store)  query.store = store;
+    if (type)  query.type = type;
+    if (tags && tags.length > 0) query.tags = { $in: tags };
+    
+ return await Tool.find(query, "_id name type toolPicture status price")
+   .skip(skip)
+   .limit(ITEMS_PER_PAGE_TOOLS);
 };
 
 const getToolById = async (toolId) => {
@@ -182,15 +175,13 @@ module.exports = {
   uploadToolPicture,
   createTool,
   addToolToTheStore,
-  getAllTools,
-  getToolByStore,
-  getToolByType,
+  getTools,
   getToolById,
   deleteFileFromStorage,
   deleteTool,
   removeToolFromTheStore,
   updateToolInformation,
-getPictureUrlbyId,
+  getPictureUrlbyId,
   updatePictureTool,
   updateStoreTool,
 };

@@ -5,22 +5,14 @@ const { asyncWrapper } = require("../../helpers/apiHelpers");
 
 const { authMiddleware } = require("../../middlewares/authMiddleware");
 
-// const {
-//   createToolParseMiddleware,
-// } = require("../../middlewares/createToolParseMiddleware");
-
-// const {
-//   fileProcessingMiddlewar,
-// } = require("../../middlewares/fileProcessingMiddlewar");
 const {
   directorOrManagerAccessCheckMiddleware,
 } = require("../../middlewares/directorOrManagerAccessCheckMiddleware");
 
 const {
   createToolController,
-  getAllToolsController,
-  getToolByStoreController,
-  getToolByTypeController,
+  getToolsController,
+
   getToolByIdController,
   deleteToolController,
   updateInformationToolController,
@@ -31,9 +23,7 @@ const {
 router.post("/create", authMiddleware,directorOrManagerAccessCheckMiddleware, asyncWrapper(createToolController));
 
 
-router.get("/", asyncWrapper(getAllToolsController));
-router.get("/byStore", asyncWrapper(getToolByStoreController));
-router.get("/byType", asyncWrapper(getToolByTypeController));
+router.get("/", asyncWrapper(getToolsController));
 router.get("/:toolId", asyncWrapper(getToolByIdController));
 
 
