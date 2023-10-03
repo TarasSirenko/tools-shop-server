@@ -27,6 +27,7 @@ const createToolController = async (req, res) => {
     price,
     tags,
     storeId,
+    cityLocation,
   } = toolInfo;
  
   const toolPictureUrl = await uploadToolPicture(req.files[0]);
@@ -42,7 +43,8 @@ const createToolController = async (req, res) => {
     price,
     tags,
     toolPictureUrl,
-    storeId
+    storeId,
+    cityLocation
   );
   
   const updatedStore = await addToolToTheStore(storeId, newTool._id);
@@ -53,9 +55,9 @@ const createToolController = async (req, res) => {
 
 const getToolsController = async (req, res) => {
   const page = req.query.page || 1;
-  const { store, type, tags } = req.query;
+  const { storeId, type, tags, status, city } = req.query;
 
-   const tools = await getTools(page, store, type, tags); 
+   const tools = await getTools(page, storeId, type, tags, status, city); 
 
   if (tools.length === 0) return res.status(404).json("Tool not found");
   return res.status(200).json(tools);

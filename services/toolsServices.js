@@ -43,7 +43,8 @@ const createTool = async (
   price,
   tags,
   toolPictureUrl,
-  storeId
+  storeId,
+  cityLocation
 ) => {
   return await Tool.create({
     name,
@@ -55,6 +56,7 @@ const createTool = async (
     tags,
     toolPicture: toolPictureUrl,
     storeId,
+    cityLocation,
   });
 };
 
@@ -67,17 +69,19 @@ const addToolToTheStore = async (storeId, toolId) => {
     { new: true }
   );
 };
-const getTools = async (page, store, type, tags) => {
+const getTools = async (page, storeId, type, tags, status, cityLocation) => {
   const skip = (page - 1) * ITEMS_PER_PAGE_TOOLS;
-    const query = {};
+  const query = {};
 
-    if (store)  query.store = store;
-    if (type)  query.type = type;
-    if (tags && tags.length > 0) query.tags = { $in: tags };
-    
- return await Tool.find(query, "_id name type toolPicture status price")
-   .skip(skip)
-   .limit(ITEMS_PER_PAGE_TOOLS);
+  if (storeId) query.storeId = storeId;
+  if (type) query.type = type;
+  if (tags && tags.length > 0) query.tags = { $in: tags };
+  if (status) query.status = status;
+  if (cityLocation) { query.cityLocation = cityLocation}
+
+  return await Tool.find(query, "_id name type toolPicture status price")
+    .skip(skip)
+    .limit(ITEMS_PER_PAGE_TOOLS);
 };
 
 const getToolById = async (toolId) => {

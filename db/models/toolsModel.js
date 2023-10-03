@@ -20,6 +20,10 @@ const toolsSchema = new mongoose.Schema({
     type: String,
     required: [true, "Serial number is required"],
   },
+  cityLocation: {
+    type: String,
+    required: [true, "City location number is required"],
+  },
   // =======================================  this chenge with a orders
   status: {
     type: String,
@@ -65,6 +69,7 @@ const toolsSchema = new mongoose.Schema({
       ref: "Order",
     },
   ],
+
   storeId: {
     type: Schema.Types.ObjectId,
     ref: "Stor",
