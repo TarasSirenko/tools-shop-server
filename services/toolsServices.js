@@ -73,9 +73,11 @@ const getTools = async (page, storeId, type, tags, status, cityLocation) => {
   const skip = (page - 1) * ITEMS_PER_PAGE_TOOLS;
   const query = {};
 
+ const tagsArr = JSON.parse(tags);
+
   if (storeId) query.storeId = storeId;
   if (type) query.type = type;
-  if (tags && tags.length > 0) query.tags = { $in: tags };
+  if (tags && tags.length > 0) query.tags = { $all: tagsArr };
   if (status) query.status = status;
   if (cityLocation && cityLocation !== "Вся Україна") { query.cityLocation = cityLocation }
 
