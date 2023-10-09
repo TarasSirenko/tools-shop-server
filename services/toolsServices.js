@@ -73,10 +73,10 @@ const getTools = async (page, storeId, type, tags, status, cityLocation) => {
   const skip = (page - 1) * ITEMS_PER_PAGE_TOOLS;
   const query = {};
 
+
+
   let tagsArr
-  if (tags && tags.startsWith("'") && tags.endsWith("'")) {
-    tagsArr  =JSON.parse( tags.slice(1, -1))
-  }
+  if (tags) { tagsArr  =JSON.parse( tags)}
 
   if (storeId) query.storeId = storeId;
   if (type) query.type = type;
