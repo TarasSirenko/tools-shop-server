@@ -24,7 +24,7 @@ router.post("/create", authMiddleware,directorOrManagerAccessCheckMiddleware, as
 
 
 router.get("/", asyncWrapper(getToolsController));
-router.get("/:toolId", asyncWrapper(getToolByIdController));
+router.get("/byId", asyncWrapper(getToolByIdController));
 
 
 router.delete(

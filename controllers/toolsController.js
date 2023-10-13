@@ -60,11 +60,11 @@ const getToolsController = async (req, res) => {
    const tools = await getTools(page, storeId, type, tags, status, city); 
 
   if (tools.length === 0) return res.status(404).json("Tool not found");
-  return res.status(200).json(tools);
+  return res.status(200).json({ data: tools, currentPage: page });
 };
 
 const getToolByIdController = async (req, res) => {
-  const { toolId } = req.params;
+  const { toolId } = req.query;
   const tool = await getToolById(toolId);
   if (tool.length === 0) return res.status(404).json("Tool not found");
   return res.status(200).json(tool);
