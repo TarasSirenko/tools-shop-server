@@ -8,13 +8,13 @@ const toolsSchema = new mongoose.Schema({
   },
   type: {
     type: String,
-    enum: ["hand tool", "power tool", "Gasoline-powered tools"],
-    default: "hand tool",
+    enum: ["Ручний інструмент", "Електро інструмент", "Бензо інструмент"],
+    default: "Ручний інструмент",
     required: [true, "Set name for tool"],
   },
   toolPicture: {
     type: String,
-    required: [false, "Tool picture is required"],
+    required: [true, "Tool picture is required"],
   },
   serialNumber: {
     type: String,
@@ -37,12 +37,10 @@ const toolsSchema = new mongoose.Schema({
       value: String,
     },
   ],
-  description: [
-    {
-      label: String,
-      value: String,
-    },
-  ],
+  description: {
+    type: String,
+    required: true,
+  },
   price: {
     type: Number,
     required: [true, "Price is required"],
