@@ -24,29 +24,70 @@ const createUser = async (email, password, phone, baseUrl) => {
     to: email,
     from: "tarassirenko71@gmail.com",
     subject: "Test email confirmation at login",
-    text: `Вітаемо!
+    text: `Вітаемо! Дякуємо за реєстрацію на нашому веб-сайті. Щоб завершити процес реєстрації та підтвердити вашу адресу електронної пошти, будь ласка, використовуйте нижченаведене посилання: <a href="${baseUrl}/api/users/verify/${verificationToken}">Посилання на підтвердження</a> Це посилання дійсне протягом обмеженого часу. Якщо ви не реєструвалися на нашому веб-сайті, просто ігноруйте це повідомлення. 
+Дякуємо за обрання нашого сервісу!З повагою, Tools Lemaev`,
 
-Дякуємо за реєстрацію на нашому веб-сайті. Щоб завершити процес реєстрації та підтвердити вашу адресу електронної пошти, будь ласка, використовуйте нижченаведене посилання:
+    html: `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Підтвердження адреси електронної пошти</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      color: #707070;
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 0;
+    }
 
-<a href="${baseUrl}/api/users/verify/${verificationToken}">Посилання на підтвердження</a>
+    .container {
+      max-width: 600px;
+      margin: 50px auto;
+      padding: 20px;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
 
-Це посилання дійсне протягом обмеженого часу. Якщо ви не реєструвалися на нашому веб-сайті, просто ігноруйте це повідомлення. 
+    h1 {
+      color: #da9022;
+    }
 
-Дякуємо за обрання нашого сервісу!
+    p {
+      margin-bottom: 20px;
+    }
 
-З повагою, Tools Lemaev`,
+    a {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 10px 20px;
+      background-color: #da9022;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 5px;
+    }
 
-    html: `Вітаемо!
-
-Дякуємо за реєстрацію на нашому веб-сайті. Щоб завершити процес реєстрації та підтвердити вашу адресу електронної пошти, будь ласка, використовуйте нижченаведене посилання:
-
-<a href="${baseUrl}/api/users/verify/${verificationToken}">Посилання на підтвердження</a>
-
-Це посилання дійсне протягом обмеженого часу. Якщо ви не реєструвалися на нашому веб-сайті, просто ігноруйте це повідомлення. 
-
-Дякуємо за обрання нашого сервісу!
-
-З повагою, Tools Lemaev`,
+    a:hover {
+      background-color: #b56b16;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Вітаємо!</h1>
+    <p>
+      Дякуємо за реєстрацію на нашому веб-сайті. Щоб завершити процес реєстрації та підтвердити вашу адресу електронної пошти, будь ласка, використовуйте нижченаведене посилання:
+    </p>
+    <a href="${baseUrl}/api/users/verify/${verificationToken}">Посилання на підтвердження</a>
+    <p>
+      Це посилання дійсне протягом обмеженого часу. Якщо ви не реєструвалися на нашому веб-сайті, просто ігноруйте це повідомлення.
+    </p>
+    <p>Дякуємо за обрання нашого сервісу!</p>
+    <p>З повагою, Tools Lemaev</p>
+  </div>
+</body>
+</html>`,
   };
   sgMail
     .send(msg)
