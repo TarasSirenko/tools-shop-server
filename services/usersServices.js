@@ -24,8 +24,29 @@ const createUser = async (email, password, phone, baseUrl) => {
     to: email,
     from: "tarassirenko71@gmail.com",
     subject: "Test email confirmation at login",
-    text: `Follow the <a href="${baseUrl}/api/users/verify/${verificationToken}">link</a> to confirm your registration.`,
-    html: `Follow the <a href="${baseUrl}/api/users/verify/${verificationToken}">link</a> to confirm your registration.`,
+    text: `Вітаемо!
+
+Дякуємо за реєстрацію на нашому веб-сайті. Щоб завершити процес реєстрації та підтвердити вашу адресу електронної пошти, будь ласка, використовуйте нижченаведене посилання:
+
+<a href="${baseUrl}/api/users/verify/${verificationToken}">Посилання на підтвердження</a>
+
+Це посилання дійсне протягом обмеженого часу. Якщо ви не реєструвалися на нашому веб-сайті, просто ігноруйте це повідомлення. 
+
+Дякуємо за обрання нашого сервісу!
+
+З повагою, Tools Lemaev`,
+
+    html: `Вітаемо!
+
+Дякуємо за реєстрацію на нашому веб-сайті. Щоб завершити процес реєстрації та підтвердити вашу адресу електронної пошти, будь ласка, використовуйте нижченаведене посилання:
+
+<a href="${baseUrl}/api/users/verify/${verificationToken}">Посилання на підтвердження</a>
+
+Це посилання дійсне протягом обмеженого часу. Якщо ви не реєструвалися на нашому веб-сайті, просто ігноруйте це повідомлення. 
+
+Дякуємо за обрання нашого сервісу!
+
+З повагою, Tools Lemaev`,
   };
   sgMail
     .send(msg)
