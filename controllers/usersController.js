@@ -35,7 +35,9 @@ const userVerificationCheckController = async (req, res) => {
   const { verificationToken } = req.params;
   const user = await userVerificationCheck(verificationToken);
   if (!user) return res.status(404).json({message:"User not found"});
-    return res.redirect('https://65522bfc0c4d4d05113dc4ad--tools-shop.netlify.app/');
+    return res.redirect(
+      "https://65522bfc0c4d4d05113dc4ad--tools-shop.netlify.app/login"
+    );
 };
 const reVerificationController = async (req, res) => {
   const { email } = req.body;
