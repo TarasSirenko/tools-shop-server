@@ -3,6 +3,7 @@ const { User } = require("../db/models/usersModel");
 
 const authMiddleware = async (req, res, next) => {
   const { authorization } = req.headers;
+  console.log(authorization);
   if (!authorization)
     return res
       .status(401)
@@ -23,6 +24,7 @@ const authMiddleware = async (req, res, next) => {
     if (!user) return res.status(404).json({ error: "User not found" });
 
     req.user = user;
+    console.log(req.user);
     next();
   } catch (err) {
     return res.status(401).json({ error: "Invalid token" });

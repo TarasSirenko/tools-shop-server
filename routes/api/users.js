@@ -22,6 +22,7 @@ const {
   logoutUsertController,
   getUsersController,
   getUserByIdController,
+  getCurrentUserController,
   getUserByPhoneController,
   deleteUserByIdController,
   updateUserStatusController,
@@ -38,7 +39,12 @@ const {
 
 router.post("/signup", addUserValidation, asyncWrapper(createUserController));
 
-router.get("/verify/:verificationToken",asyncWrapper(userVerificationCheckController));
+router.get("/verify/:verificationToken", asyncWrapper(userVerificationCheckController));
+
+router.get(
+  "/verify/:verificationToken",
+  asyncWrapper(userVerificationCheckController)
+);
 
 router.post("/verify", asyncWrapper(reVerificationController));
 
@@ -51,8 +57,15 @@ router.get(
   authMiddleware,
   checkUserNotClientMiddleware,asyncWrapper(getUsersController)
 );
+router.get(
+  "/currentUser",
+  authMiddleware,
+  asyncWrapper(getCurrentUserController)
+);
 
 router.get("/:userId", authMiddleware, checkUserNotClientMiddleware, asyncWrapper(getUserByIdController));
+
+
 
 router.get(
   "/byPhone",

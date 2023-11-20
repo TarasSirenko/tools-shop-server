@@ -75,6 +75,13 @@ const getUserByIdController = async (req, res) => {
   if (!user) return res.status(404).json({ message: "No user with this id" });
   return res.status(200).json(user);
 };
+
+const getCurrentUserController = async (req, res) => {
+  console.log(req.user);
+  return res.status(200).json({ data: req.user });
+};
+
+
 const getUserByPhoneController = async (req, res) => {
   const { userPhone } = req.body;
   const user = await getUserByPhone(userPhone);
@@ -201,6 +208,7 @@ module.exports = {
   logoutUsertController,
   getUsersController,
   getUserByIdController,
+  getCurrentUserController,
   getUserByPhoneController,
   deleteUserByIdController,
   updateUserStatusController,
@@ -211,4 +219,5 @@ module.exports = {
   changePasswordRequestController,
   changePasswordController,
   userChengePasswordController,
+  
 };
