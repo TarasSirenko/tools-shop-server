@@ -230,7 +230,10 @@ const loginUser = async (email, password ) => {
   );
   await User.findOneAndUpdate({ email: email }, { $set: { token } });
 
-  return { token, user: { email, phone: user.phone } };
+  return {
+    token,
+    user: { email, phone: user.phone, subscription: user.subscription },
+  };
 };
 
 const logoutUser = async (userId) => {
