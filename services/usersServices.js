@@ -214,9 +214,11 @@ const reVerification = async (email, baseUrl) => {
   );
 };
 
-const loginUser = async (email, password ) => {
+const loginUser = async (email, password) => {
+
   const user = await User.findOne({ email: email });
-  if (!user.verify) return "Not verified";
+    console.log(user);
+  if (user?.verify) return "Not verified";
   if (!user) return null
   const isPasswordValid = await bcrypt.compare(password, user.password);
   if (!isPasswordValid) return "Wrong password"
