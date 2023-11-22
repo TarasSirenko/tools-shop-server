@@ -115,7 +115,7 @@ router.patch(
 );
 
 router.get(
-  "/changePasword/:changePasswordToken",
+  "/changePassword/:changePasswordToken",
   asyncWrapper(changePasswordController)
 );
 

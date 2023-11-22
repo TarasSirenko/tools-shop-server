@@ -204,7 +204,7 @@
         "summary": "User login",
         "operationId": "login",
         "requestBody": {
-          "description": "User email and paswword",
+          "description": "User email and passwword",
           "required": true,
           "content": {
             "application/json": {
@@ -392,11 +392,11 @@
         }
       }
     },
-    "/api/users/changePasword/{changePasswordToken}": {
+    "/api/users/changePassword/{changePasswordToken}": {
       "get": {
         "tags": ["User"],
         "summary": "Verification via email to change password",
-        "operationId": "changePasword",
+        "operationId": "changePassword",
         "parameters": [
           {
             "name": "changePasswordToken",

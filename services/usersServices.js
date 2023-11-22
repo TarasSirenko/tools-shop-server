@@ -379,7 +379,7 @@ const changePasswordRequest = async (email, baseUrl) => {
     to: email,
     from: "tarassirenko71@gmail.com",
     subject: "Test email confirmation at login",
-    text: `Your temporary password is ${temporaryPassword}, follow the <a href="${baseUrl}/api/users/changePasword/${setPasswordToken}">link</a> to restore access. For better security, change the password to your personal one in the user settings.`,
+    text: `Your temporary password is ${temporaryPassword}, follow the <a href="${baseUrl}/api/users/changePassword/${setPasswordToken}">link</a> to restore access. For better security, change the password to your personal one in the user settings.`,
     html: `<!DOCTYPE html>
 <html lang="uk">
 <head>
