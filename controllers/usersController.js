@@ -178,10 +178,9 @@ const changePasswordController = async (req, res) => {
   const user = await changePassword(changePasswordToken);        
   if (!user) return res.status(404).json({ message: "Password recovery token is no longer active" });
   
-  return res.status(200).json({
-    mesage: "Password successfully changed to temporary",
-    user,
-  });
+  return res.redirect(
+    "https://655b5ff58ad8c50fd222db71--tools-shop.netlify.app/login"
+  );
 };
 
 const userChengePasswordController = async (req, res) => {
