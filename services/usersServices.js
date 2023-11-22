@@ -380,7 +380,76 @@ const changePasswordRequest = async (email, baseUrl) => {
     from: "tarassirenko71@gmail.com",
     subject: "Test email confirmation at login",
     text: `Your temporary password is ${temporaryPassword}, follow the <a href="${baseUrl}/api/users/changePasword/${setPasswordToken}">link</a> to restore access. For better security, change the password to your personal one in the user settings.`,
-    html: `Your temporary password is ${temporaryPassword}, follow the <a href="${baseUrl}/api/users/changePasword/${setPasswordToken}">link</a> to restore access. For better security, change the password to your personal one in the user settings.`,
+    html: `<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Відновлення доступу</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      color: #707070;
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 50px auto;
+      padding: 20px;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      color: #da9022;
+    }
+
+    p {
+      margin-bottom: 20px;
+    }
+
+    a {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 10px 20px;
+      background-color: #da9022;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+
+    a:hover {
+      background-color: #b56b16;
+    }
+
+    .icon {
+      width: 20px;
+      height: 20px;
+      margin-right: 10px;
+      fill: #da9022;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Ваш тимчасовий пароль: ${temporaryPassword}</h1>
+    <p>
+      Щоб відновити доступ, перейдіть за нижченаведеним посиланням:
+    </p>
+    <a href="${baseUrl}/api/users/changePassword/${setPasswordToken}">
+      Посилання на відновлення доступу
+    </a>
+    <p>
+      Для забезпечення безпеки, будь ласка, змініть пароль на особистий у налаштуваннях користувача.
+    </p>
+    <p>Дякуємо за використання нашого сервісу!</p>
+    <p>З повагою, Tools Lemaev</p>
+  </div>
+</body>
+</html>`,
   };
   const result = await sgMail.send(msg);
   if (result.error) {
