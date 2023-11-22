@@ -358,8 +358,23 @@ const updateUserInfo = async (
 
 
 const changePasswordRequest = async (email, baseUrl) => {
+function generatePassword() {
+  let password = "";
+  while (true) {
+    password = shortid.generate();
+    if (
+      password.length >= 4 &&
+      password.length <= 16 &&
+      /^[a-zA-Z0-9]+$/.test(password)
+    ) {
+      break;
+    }
+  }
+  return password;
+}
 
-  const temporaryPassword = shortid.generate();
+const temporaryPassword = generatePassword();
+
   const user = await User.findOne({ email });
   if (!user) return null
     const setPasswordToken = jwt.sign(
