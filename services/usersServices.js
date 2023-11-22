@@ -365,7 +365,8 @@ function generatePassword() {
     if (
       password.length >= 4 &&
       password.length <= 16 &&
-      /^[a-zA-Z0-9]+$/.test(password)
+      /[a-zA-Z]/.test(password) &&
+      /\d/.test(password)
     ) {
       break;
     }
