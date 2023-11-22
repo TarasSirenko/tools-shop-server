@@ -217,9 +217,10 @@ const reVerification = async (email, baseUrl) => {
 const loginUser = async (email, password) => {
 
   const user = await User.findOne({ email: email });
-    console.log(user);
+  console.log(user);
+    if (!user) return null;
   if (!user?.verify) return "Not verified";
-  if (!user) return null
+
   const isPasswordValid = await bcrypt.compare(password, user.password);
   if (!isPasswordValid) return "Wrong password"
   const token = jwt.sign(
