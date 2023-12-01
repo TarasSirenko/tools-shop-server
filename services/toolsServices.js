@@ -82,7 +82,13 @@ const getTools = async (page, storeId, type, tags, status, cityLocation) => {
   if (type) query.type = type;
   if (tags && tagsArr.length > 0) query.tags = { $all: tagsArr }; 
   if (status) query.status = status;
-  if (cityLocation && cityLocation !== "Вся Україна") { query.cityLocation = cityLocation }
+  if (
+    cityLocation &&
+    cityLocation !== "Вся Україна" &&
+    cityLocation !== "Україна"
+  ) {
+    query.cityLocation = cityLocation;
+  }
 
   return await Tool.find(query, "_id name type toolPicture status price")
     .skip(skip)
