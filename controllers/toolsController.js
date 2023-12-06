@@ -17,7 +17,9 @@ const {
 } = require("../services/toolsServices");
 
 const createToolController = async (req, res) => {
+    console.log(req.body.data);
   const toolInfo = JSON.parse(req.body.data);
+  console.log(toolInfo);
   const {
     name,
     type,
