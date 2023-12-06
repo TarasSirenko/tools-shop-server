@@ -42,7 +42,7 @@ router.post(
   asyncWrapper(createStoreController)
 );
 
-router.get("/", authMiddleware, asyncWrapper(getAllStoresController));
+router.get("/", asyncWrapper(getAllStoresController));
 
 router.get(
   "/:storeId",
