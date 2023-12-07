@@ -36,7 +36,7 @@ const userVerificationCheckController = async (req, res) => {
   const user = await userVerificationCheck(verificationToken);
   if (!user) return res.status(404).json({message:"User not found"});
     return res.redirect(
-      "https://6565d92747d92e67cd85a14b--tools-shop.netlify.app/login"
+      "https://tools-shop.netlify.app/login"
     );
 };
 const reVerificationController = async (req, res) => {
@@ -179,7 +179,7 @@ const changePasswordController = async (req, res) => {
   if (!user) return res.status(404).json({ message: "Password recovery token is no longer active" });
   
   return res.redirect(
-    "https://6565d92747d92e67cd85a14b--tools-shop.netlify.app/login"
+    "https://tools-shop.netlify.app/login"
   );
 };
 
